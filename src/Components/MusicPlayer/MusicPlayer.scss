@@ -1,0 +1,85 @@
+$player-bg-color: #f5f5f5;
+$song-item-bg-color: #e0e0e0;
+$song-item-active-bg-color: #d0d0d0;
+$player-border-radius: 8px;
+$song-item-border-radius: 4px;
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$control-button-color: #4caf50; // Updated button color
+$player-header-color: #2196f3; // Added header color
+
+.music-player {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $player-bg-color;
+  border-radius: $player-border-radius;
+  box-shadow: $box-shadow;
+
+  h1 {
+    color: $player-header-color; // Apply header color
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .song-list {
+    margin-bottom: 20px;
+
+    .song-item {
+      padding: 10px;
+      background-color: $song-item-bg-color;
+      border-radius: $song-item-border-radius;
+      margin-bottom: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease; // Added transition for hover effect
+
+      &:hover {
+        background-color: darken(
+          $song-item-bg-color,
+          10%
+        ); // Added hover effect
+      }
+
+      &.active {
+        background-color: $song-item-active-bg-color;
+      }
+    }
+  }
+
+  .player-controls {
+    text-align: center;
+
+    .controls {
+      margin-bottom: 10px;
+
+      button {
+        margin: 0 5px;
+        background-color: $control-button-color;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease; // Added transition for hover effect
+
+        &:hover {
+          background-color: darken(
+            $control-button-color,
+            10%
+          ); // Added hover effect
+        }
+      }
+    }
+
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      input[type="range"] {
+        flex: 1;
+        margin-right: 10px;
+        accent-color: $control-button-color; // Added accent color for the range input
+      }
+    }
+  }
+}
