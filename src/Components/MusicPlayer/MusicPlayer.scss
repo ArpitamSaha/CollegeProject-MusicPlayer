@@ -200,3 +200,91 @@ $accent-color: #00ff9f; // Bright cyan
     }
   }
 }
+
+// Responsiveness
+@media (max-width: 768px) {
+  .content {
+    .player-controls {
+      .song-info {
+        flex-direction: column;
+        align-items: center;
+
+        .album-cover {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+      }
+
+      .controls {
+        button {
+          font-size: 20px;
+          margin: 0 5px;
+        }
+      }
+
+      .progress-bar {
+        span {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .footer {
+    justify-content: center;
+
+    .additional-controls {
+      input[type="range"] {
+        width: 80px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    .player-controls {
+      .song-info {
+        .album-cover {
+          width: 80px;
+          height: 80px;
+        }
+
+        .song-details {
+          h2 {
+            font-size: 16px;
+          }
+
+          span {
+            font-size: 12px;
+          }
+        }
+      }
+
+      .controls {
+        button {
+          font-size: 16px;
+        }
+      }
+
+      .progress-bar {
+        span {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  .footer {
+    .additional-controls {
+      input[type="range"] {
+        width: 60px;
+      }
+
+      button {
+        font-size: 14px;
+        margin: 0 3px;
+      }
+    }
+  }
+}
