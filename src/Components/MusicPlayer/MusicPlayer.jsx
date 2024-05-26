@@ -133,6 +133,7 @@ const MusicPlayer = () => {
     if (audioRef.current) {
       const seekTime = (e.target.value / 100) * audioRef.current.duration;
       audioRef.current.currentTime = seekTime;
+      setCurrentTime(seekTime);
     }
   };
 
@@ -163,6 +164,11 @@ const MusicPlayer = () => {
                 ref={audioRef}
                 src={songs[currentSongIndex].src}
                 onTimeUpdate={handleTimeUpdate}
+                onLoadedMetadata={() => {
+                  if (audioRef.current) {
+                    setCurrentTime(audioRef.current.currentTime);
+                  }
+                }}
               />
               <div className="controls">
                 <button onClick={prevSong}>
@@ -192,17 +198,26 @@ const MusicPlayer = () => {
                   )}
                 </button>
               </div>
+
               <div className="progress-bar">
                 <span>{formatTime(currentTime)}</span>
                 <div className="bar">
-                  <div
-                    className="progress"
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={
+                      (currentTime / audioRef.current?.duration) * 100 || 0
+                    }
+                    onChange={handleSeek}
                     style={{
-                      width: `${
+                      background: `linear-gradient(to right, #ccc ${
                         (currentTime / audioRef.current?.duration) * 100 || 0
-                      }%`,
+                      }%, #fff ${
+                        (currentTime / audioRef.current?.duration) * 100 || 0
+                      }%)`,
                     }}
-                  ></div>
+                  />
                 </div>
                 <span>{formatTime(audioRef.current?.duration || 0)}</span>
               </div>
