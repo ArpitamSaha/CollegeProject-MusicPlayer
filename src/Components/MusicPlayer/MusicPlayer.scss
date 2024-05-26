@@ -1,84 +1,193 @@
-$player-bg-color: #f5f5f5;
-$song-item-bg-color: #e0e0e0;
-$song-item-active-bg-color: #d0d0d0;
-$player-border-radius: 8px;
-$song-item-border-radius: 4px;
-$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-$control-button-color: #4caf50; // Updated button color
-$player-header-color: #2196f3; // Added header color
+$primary-color: #00b7eb; // Cyan
+$secondary-color: #00d2ff; // Light cyan
+$background-color: #0c2d33; // Dark blue-gray
+$text-color: #fff; // White
+$accent-color: #00ff9f; // Bright cyan
 
 .music-player {
-  width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: $player-bg-color;
-  border-radius: $player-border-radius;
-  box-shadow: $box-shadow;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $background-color;
+  color: $text-color;
+  font-family: "Circular", sans-serif;
 
-  h1 {
-    color: $player-header-color; // Apply header color
-    text-align: center;
-    margin-bottom: 20px;
-  }
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: darken($background-color, 5%);
 
-  .song-list {
-    margin-bottom: 20px;
-
-    .song-item {
-      padding: 10px;
-      background-color: $song-item-bg-color;
-      border-radius: $song-item-border-radius;
-      margin-bottom: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease; // Added transition for hover effect
-
-      &:hover {
-        background-color: darken(
-          $song-item-bg-color,
-          10%
-        ); // Added hover effect
-      }
-
-      &.active {
-        background-color: $song-item-active-bg-color;
-      }
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: $primary-color;
     }
   }
 
-  .player-controls {
-    text-align: center;
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
-    .controls {
-      margin-bottom: 10px;
+    .song-list {
+      height: 30%;
+      background-color: darken($background-color, 10%);
+      padding: 20px;
+      overflow-y: auto;
 
-      button {
-        margin: 0 5px;
-        background-color: $control-button-color;
-        color: #fff;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 4px;
+      .song-item {
+        padding: 10px;
         cursor: pointer;
-        transition: background-color 0.3s ease; // Added transition for hover effect
+        color: $text-color;
+        border-radius: 5px;
 
-        &:hover {
-          background-color: darken(
-            $control-button-color,
-            10%
-          ); // Added hover effect
+        &.active {
+          background-color: $primary-color;
+          color: $text-color;
         }
       }
     }
 
-    .progress-bar {
+    .player-controls {
+      flex: 1;
+      padding: 20px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
 
+      .song-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .album-cover {
+          width: 100px;
+          height: 100px;
+          background-color: darken($background-color, 20%);
+          margin-right: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .song-details {
+          h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+          }
+
+          span {
+            font-size: 14px;
+            color: lighten($text-color, 20%);
+          }
+        }
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        button {
+          background-color: transparent;
+          border: none;
+          color: lighten($text-color, 20%);
+          font-size: 24px;
+          margin: 0 10px;
+          cursor: pointer;
+          transition: color 0.3s;
+
+          &:hover {
+            color: $text-color;
+          }
+        }
+      }
+
+      .progress-bar {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 20px;
+
+        span {
+          margin-right: 10px;
+          color: $text-color;
+        }
+
+        .bar {
+          flex: 1;
+          height: 5px;
+          background-color: darken($background-color, 15%);
+          border-radius: 5px;
+          overflow: hidden;
+
+          .progress {
+            height: 100%;
+            background-color: $accent-color;
+          }
+        }
+      }
+
+      .additional-controls {
+        display: flex;
+        align-items: center;
+
+        button {
+          background-color: transparent;
+          border: none;
+          color: lighten($text-color, 20%);
+          font-size: 18px;
+          margin: 0 10px;
+          cursor: pointer;
+          transition: color 0.3s;
+
+          &:hover {
+            color: $text-color;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    background-color: darken($background-color, 5%);
+
+    .additional-controls {
+      display: flex;
+      align-items: center;
+
+      button {
+        background-color: transparent;
+        border: none;
+        color: lighten($text-color, 20%);
+        font-size: 16px;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: color 0.3s;
+
+        &:hover {
+          color: $text-color;
+        }
+      }
+
       input[type="range"] {
-        flex: 1;
-        margin-right: 10px;
-        accent-color: $control-button-color; // Added accent color for the range input
+        width: 100px;
+        margin: 0 10px;
+
+        &::-webkit-slider-thumb {
+          background-color: $accent-color;
+        }
+
+        &::-moz-range-thumb {
+          background-color: $accent-color;
+        }
       }
     }
   }
