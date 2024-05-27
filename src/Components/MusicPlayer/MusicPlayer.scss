@@ -1,62 +1,89 @@
-$primary-color: #00b7eb; // Cyan
-$secondary-color: #00d2ff; // Light cyan
-$background-color: #0c2d33; // Dark blue-gray
-$text-color: #fff; // White
-$accent-color: #00ff9f; // Bright cyan
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+$primary-color: #1db954;
+$secondary-color: #191414;
+$text-color: #fff;
+$accent-color: #535353;
+$scrollbar-track-color: #2d2d2d;
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: $secondary-color;
+  color: $text-color;
+}
 
 .music-player {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: $background-color;
-  color: $text-color;
-  font-family: "Circular", sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #121212;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 
   .header {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    background-color: darken($background-color, 5%);
+    text-align: center;
+    margin-bottom: 20px;
 
     h1 {
-      margin: 0;
-      font-size: 24px;
-      font-weight: 700;
+      font-size: 2.5rem;
+      font-weight: 600;
       color: $primary-color;
+      text-shadow: 0 0 10px rgba($primary-color, 0.5);
     }
   }
 
   .content {
-    flex: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
 
     .song-list {
-      height: 30%;
-      background-color: darken($background-color, 10%);
-      padding: 20px;
+      flex: 1;
+      height: 300px;
+      max-width: 300px;
+      padding: 10px;
+      background-color: $secondary-color;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: $scrollbar-track-color;
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $primary-color;
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: darken($primary-color, 10%);
+      }
 
       .song-item {
         padding: 10px;
         cursor: pointer;
-        color: $text-color;
-        border-radius: 5px;
+        transition: background-color 0.3s ease;
 
+        &:hover,
         &.active {
-          background-color: $primary-color;
-          color: $text-color;
+          background-color: $accent-color;
+          border-radius: 5px;
         }
       }
     }
 
     .player-controls {
-      flex: 1;
+      flex: 2;
       padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
 
       .song-info {
         display: flex;
@@ -64,44 +91,40 @@ $accent-color: #00ff9f; // Bright cyan
         margin-bottom: 20px;
 
         .album-cover {
-          width: 100px;
-          height: 100px;
-          background-color: darken($background-color, 20%);
-          margin-right: 20px;
-          border-radius: 10px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          width: 80px;
+          height: 80px;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
         .song-details {
-          h2 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: 700;
-          }
+          flex: 1;
+          margin-left: 20px;
 
-          span {
-            font-size: 14px;
-            color: lighten($text-color, 20%);
+          h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
           }
         }
       }
 
       .controls {
         display: flex;
-        align-items: center;
+        justify-content: center;
         margin-bottom: 20px;
 
         button {
           background-color: transparent;
           border: none;
-          color: lighten($text-color, 20%);
-          font-size: 24px;
+          color: $text-color;
+          font-size: 1.5rem;
           margin: 0 10px;
           cursor: pointer;
-          transition: color 0.3s;
+          transition: color 0.3s ease;
 
           &:hover {
-            color: $text-color;
+            color: $primary-color;
           }
         }
       }
@@ -109,51 +132,31 @@ $accent-color: #00ff9f; // Bright cyan
       .progress-bar {
         display: flex;
         align-items: center;
-        width: 100%;
-        margin-bottom: 20px;
+        justify-content: space-between;
+        margin-bottom: 10px;
 
         span {
-          margin-right: 10px;
-          color: $text-color;
+          font-size: 0.9rem;
+          color: $accent-color;
         }
 
         .bar {
           flex: 1;
           height: 5px;
-          background-color: darken($background-color, 15%);
+          background-color: $accent-color;
           border-radius: 5px;
-          overflow: hidden;
+          margin: 0 10px;
           position: relative;
 
-          input[type="range"] {
+          .progress-indicator {
             position: absolute;
-            top: 0;
+            top: -5px;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            outline: none;
-            margin: 0;
-            padding: 0;
-            cursor: pointer;
-          }
-        }
-      }
-      .additional-controls {
-        display: flex;
-        align-items: center;
-
-        button {
-          background-color: transparent;
-          border: none;
-          color: lighten($text-color, 20%);
-          font-size: 18px;
-          margin: 0 10px;
-          cursor: pointer;
-          transition: color 0.3s;
-
-          &:hover {
-            color: $text-color;
+            width: 15px;
+            height: 15px;
+            background-color: $primary-color;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba($primary-color, 0.5);
           }
         }
       }
@@ -162,10 +165,8 @@ $accent-color: #00ff9f; // Bright cyan
 
   .footer {
     display: flex;
-    align-items: center;
     justify-content: flex-end;
-    padding: 10px 20px;
-    background-color: darken($background-color, 5%);
+    align-items: center;
 
     .additional-controls {
       display: flex;
@@ -174,116 +175,115 @@ $accent-color: #00ff9f; // Bright cyan
       button {
         background-color: transparent;
         border: none;
-        color: lighten($text-color, 20%);
-        font-size: 16px;
-        margin: 0 5px;
+        color: $text-color;
+        font-size: 1.2rem;
+        margin-right: 10px;
         cursor: pointer;
-        transition: color 0.3s;
+        transition: color 0.3s ease;
 
         &:hover {
-          color: $text-color;
+          color: $primary-color;
         }
       }
 
       input[type="range"] {
+        -webkit-appearance: none;
         width: 100px;
-        margin: 0 10px;
+        height: 5px;
+        background-color: $accent-color;
+        border-radius: 5px;
+        outline: none;
+        cursor: pointer;
 
         &::-webkit-slider-thumb {
-          background-color: $accent-color;
-        }
-
-        &::-moz-range-thumb {
-          background-color: $accent-color;
+          -webkit-appearance: none;
+          width: 15px;
+          height: 15px;
+          background-color: $primary-color;
+          border-radius: 50%;
+          box-shadow: 0 0 10px rgba($primary-color, 0.5);
         }
       }
     }
   }
 }
 
-// Responsiveness
+// Responsiveness with Media Queries
 @media (max-width: 768px) {
-  .content {
-    .player-controls {
-      .song-info {
-        flex-direction: column;
-        align-items: center;
+  .music-player {
+    .content {
+      flex-direction: column;
+      align-items: stretch;
 
-        .album-cover {
-          margin-right: 0;
+      .song-list {
+        max-width: 100%;
+        height: 200px;
+        margin-bottom: 20px;
+      }
+
+      .player-controls {
+        padding: 10px;
+
+        .song-info {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+
+          .song-details {
+            margin-left: 0;
+            margin-top: 10px;
+          }
+        }
+
+        .controls {
           margin-bottom: 10px;
         }
       }
-
-      .controls {
-        button {
-          font-size: 20px;
-          margin: 0 5px;
-        }
-      }
-
-      .progress-bar {
-        span {
-          font-size: 12px;
-        }
-      }
     }
-  }
 
-  .footer {
-    justify-content: center;
+    .footer {
+      justify-content: center;
 
-    .additional-controls {
-      input[type="range"] {
-        width: 80px;
+      .additional-controls {
+        input[type="range"] {
+          width: 80px;
+        }
       }
     }
   }
 }
 
 @media (max-width: 480px) {
-  .content {
-    .player-controls {
-      .song-info {
-        .album-cover {
-          width: 80px;
-          height: 80px;
-        }
+  .music-player {
+    padding: 10px;
 
-        .song-details {
-          h2 {
-            font-size: 16px;
-          }
-
-          span {
-            font-size: 12px;
-          }
-        }
-      }
-
-      .controls {
-        button {
-          font-size: 16px;
-        }
-      }
-
-      .progress-bar {
-        span {
-          font-size: 10px;
-        }
+    .header {
+      h1 {
+        font-size: 2rem;
       }
     }
-  }
 
-  .footer {
-    .additional-controls {
-      input[type="range"] {
-        width: 60px;
-      }
+    .content {
+      .player-controls {
+        .song-info {
+          .album-cover {
+            width: 60px;
+            height: 60px;
+          }
 
-      button {
-        font-size: 14px;
-        margin: 0 3px;
+          .song-details {
+            h2 {
+              font-size: 1.2rem;
+            }
+          }
+        }
+
+        .controls {
+          button {
+            font-size: 1.2rem;
+            margin: 0 5px;
+          }
+        }
       }
     }
   }

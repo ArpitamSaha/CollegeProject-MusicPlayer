@@ -17,6 +17,11 @@ import Song2 from "../Songs/Gumaan.mp3";
 import Song3 from "../Songs/Khayaal.mp3";
 import Song4 from "../Songs/Khel.mp3";
 import Song5 from "../Songs/Shikayat.mp3";
+import Song6 from "../Songs/Dancing With Your Ghost.mp3";
+import Song7 from "../Songs/Dandelions  Ruth B..mp3";
+import Song8 from "../Songs/Ghost  Justin Bieber.mp3";
+import Song9 from "../Songs/Love Is Gone  ( Acoustic )  SLANDER.mp3";
+import Song10 from "../Songs/STAY (with Justin Bieber).mp3";
 
 const SongInfo = ({ title }) => (
   <div className="song-info">
@@ -34,7 +39,13 @@ const MusicPlayer = () => {
     { title: "Khayaal", src: Song3 },
     { title: "Khel", src: Song4 },
     { title: "Shikayat", src: Song5 },
+    { title: "STAY", src: Song6 },
+    { title: "Ghost", src: Song7 },
+    { title: "Dandelions", src: Song8 },
+    { title: "Love Is Gone", src: Song9 },
+    { title: "Dancing With Your Ghost", src: Song10 },
   ]);
+
   const [currentSongIndex, setCurrentSongIndex] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
@@ -129,19 +140,20 @@ const MusicPlayer = () => {
     setIsLooping(!isLooping);
   };
 
-  const handleSeek = (e) => {
-    if (audioRef.current) {
-      const seekTime = (e.target.value / 100) * audioRef.current.duration;
-      audioRef.current.currentTime = seekTime;
-      setCurrentTime(seekTime);
-    }
-  };
+  // const handleSeek = (e) => {
+  //   if (audioRef.current) {
+  //     const seekTime = (e.target.value / 100) * audioRef.current.duration;
+  //     audioRef.current.currentTime = seekTime;
+  //     setCurrentTime(seekTime);
+  //   }
+  // };
 
   return (
     <div className="music-player">
       <div className="header">
         <h1>Meloholic</h1>
       </div>
+
       <div className="content">
         <div className="song-list">
           {songs.map((song, index) => (
@@ -156,6 +168,7 @@ const MusicPlayer = () => {
             </div>
           ))}
         </div>
+
         <div className="player-controls">
           {currentSongIndex !== null && songs[currentSongIndex] && (
             <>
@@ -202,22 +215,14 @@ const MusicPlayer = () => {
               <div className="progress-bar">
                 <span>{formatTime(currentTime)}</span>
                 <div className="bar">
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={
-                      (currentTime / audioRef.current?.duration) * 100 || 0
-                    }
-                    onChange={handleSeek}
+                  <div
+                    className="progress-indicator"
                     style={{
-                      background: `linear-gradient(to right, #ccc ${
+                      left: `${
                         (currentTime / audioRef.current?.duration) * 100 || 0
-                      }%, #fff ${
-                        (currentTime / audioRef.current?.duration) * 100 || 0
-                      }%)`,
+                      }%`,
                     }}
-                  />
+                  ></div>
                 </div>
                 <span>{formatTime(audioRef.current?.duration || 0)}</span>
               </div>
